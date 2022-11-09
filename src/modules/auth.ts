@@ -30,9 +30,8 @@ export const protect = (req, res, next) => {
   }
 
   try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = payload;
-    console.log(payload);
+    const user = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = user;
     next();
     return;
   } catch (e) {
@@ -42,7 +41,6 @@ export const protect = (req, res, next) => {
     return;
   }
 };
-
 
 export const comparePasswords = (password, hash) => {
   return bcrypt.compare(password, hash);
