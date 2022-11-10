@@ -20,9 +20,22 @@ app.use((req, res, next) => {
   req.ssshhhh_secret = "doggy";
   next();
 });
-
+app.get('/', (req,res)=>{
+  res.json({message: 'hello'})
+})
 app.use("/api", protect, router);
 app.post("/user", createNewUser);
 app.post("/signin", signin);
-
+app.use((err, req, res, next) => {
+  console.log("location -", err.location);
+  if (err.type === "input") {
+    res.status(400);
+    res.json({ message: "Wrong input" });
+  } else if (err.type === "auth") {
+    res.status(401);
+    res.json({ message: "unauthenticated" });
+  } else {
+    res.status(500).json({ message: "oops, thats on us" });
+  }
+});
 export default app;

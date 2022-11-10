@@ -5,7 +5,7 @@ export const handleInputError = (req, res, next) => {
 
   if (!errors.isEmpty()) {
     res.status(400);
-    res.json({ errors: errors.array() });
+    res.json({ errors: errors.mapped() });
   } else {
     next();
   }
