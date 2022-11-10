@@ -21,7 +21,7 @@ app.use((req, res, next) => {
   next();
 });
 app.get('/', (req,res)=>{
-  res.json({message: 'hello'})
+  res.json({message: 'Welcome to API design api by chocoscoding'})
 })
 app.use("/api", protect, router);
 app.post("/user", createNewUser);
